@@ -21,9 +21,6 @@ def index():
 
 @app.route('/vacancies', methods=['GET', 'PUT'])
 def vacancies():
-    print('++' * 10)
-    print(request.method)
-    print('++' * 10)
     if request.method == 'PUT':
         try:
             data = {}
@@ -41,7 +38,6 @@ def vacancies():
                 raise RequiredException('All columns must contain non-empty value')
 
             new_vacancy = Vacancies(**data)
-            print(new_vacancy)
             db_session.commit()
             return json.dumps({'success': True})
         except ValueError:
@@ -54,12 +50,11 @@ def vacancies():
 
 
     vacancies_list = get_vacancies_list()
-    print(vacancies_list)
     content = {'vacancies_list': vacancies_list}
     return render_template('vacancies.html', **content)
 
 
 @app.route('/vacancies/<idx>', methods=['GET', 'DELETE'])
 def vacancy(idx):
-    print(idx)
-    return redirect(url_for('vacancies'))
+
+    return render_template('vacancies.html', **content)

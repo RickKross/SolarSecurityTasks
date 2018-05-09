@@ -16,8 +16,6 @@ class Vacancies(Base):
     city = Column(String(255))
 
     def __init__(self, **kwargs):
-        print(dir(self))
-        pprint(kwargs)
         for key, value in kwargs.items():
             if key in dir(self):
                 setattr(self, key, value)

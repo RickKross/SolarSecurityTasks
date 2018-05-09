@@ -13,7 +13,6 @@ app = Flask(__name__, static_folder='static')
 db_path = os.path.join(os.path.dirname(__file__), 'test.db')
 db_uri = 'sqlite:///{}'.format(db_path)
 
-print(db_uri)
 engine = create_engine(db_uri, convert_unicode=True)
 db_session = scoped_session(sessionmaker(autocommit=False,
                                          autoflush=False,
