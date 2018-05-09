@@ -1,0 +1,114 @@
+{% extends "base.html" %}
+{% block title %}
+    Список вакансий
+{% endblock %}
+
+{% block base_content %}
+    <div class="container-fluid">
+        <div class="row">
+
+
+            <main role="main" class="col-md-12 ml-sm-auto col-lg-12 px-4">
+
+                <h4> Список вакансий</h4>
+                <div class="table-responsive">
+                    <table class="table table-striped table-sm">
+                        <thead>
+                        <tr>
+                            <th>#</th>
+                            <th>Наименование</th>
+                            <th>Уровень зарплаты</th>
+                            <th>Требуемый опыт работы</th>
+                            <th>Город</th>
+                        </tr>
+                        </thead>
+                        <tbody>
+                        {% for vacancy in vacancies_list %}
+                            <tr>
+                                <td>{{ vacancy.id }}</td>
+                                <td><a href="vacancies/{{ vacancy.id }}">{{ vacancy.name }}</a></td>
+                                <td>{{ vacancy.salary }}</td>
+                                <td>{{ vacancy.experience }}</td>
+                                <td>{{ vacancy.city }}</td>
+                            </tr>
+                        {% endfor %}
+                        </tbody>
+                    </table>
+                </div>
+                <hr>
+                <h4> Добавить вакансию</h4>
+
+                <form id="addVacancy">
+                    <div class="row">
+                        <div class="form-group col-md-3">
+                            <label for="exampleInputEmail1">Наименование</label>
+                            <input type="text" class="form-control" name="name" required
+                                   placeholder="Наименование...">
+                        </div>
+                        <div class="col-md-9"></div>
+                        <div class="form-group col-md-3">
+                            <label for="exampleInputEmail1">Уровень заработной платы</label>
+                            <input type="number" class="form-control" aria-describedby="salaryHelp" name="salary" required
+                                   placeholder="Уровень з/п...">
+                            <div id="salaryHelp">
+                                <small class="form-text text-muted">Должно быть целым числом. Дробная часть будет
+                                    отброшена
+                                </small>
+                            </div>
+                        </div>
+                        <div class="col-md-9"></div>
+                    </div>
+                    <div class="row">
+                        <div class="form-group col-md-3">
+                            <label for="exampleInputEmail1">Требуемый опыт работы</label>
+                            <input type="text" class="form-control" name="experience" required
+                                   placeholder="Опыт работы...">
+                        </div>
+                        <div class="col-md-9"></div>
+                        <div class="form-group col-md-3">
+                            <label for="exampleInputEmail1">Город</label>
+                            <input type="text" class="form-control" name="city" required
+                                   placeholder="Город...">
+                        </div>
+                        <div class="col-md-9"></div>
+
+                    </div>
+                    <button type="submit" class="btn btn-primary">Добавить</button>
+                </form>
+            </main>
+        </div>
+    </div>
+
+    <!-- Bootstrap core JavaScript
+    ================================================== -->
+    <!-- Placed at the end of the document so the pages load faster -->
+    <script type="text/javascript">
+        $('#addVacancy').submit(function (e) {
+            e.preventDefault();
+            e.stopPropagation();
+
+            $.ajax({
+                url: '',
+                method: "PUT",
+                data: $(this).serialize(),
+                success(response) {
+                    response = JSON.parse(response)
+
+                    if (response && response.success) {
+                        location.reload();
+
+                    } else if (!response || response && response.error) {
+                        // alerts are too broad, but who cares in testing?
+                        alert('При добавлении вакансии возникла ошибка. ' + response.type && response.type === 'salary' ? 'Заработная плата должна быть числом' : 'Возможно, были заполнены не все поля')
+                    }
+                },
+                error() {
+                    $('#salaryWarning').show()
+                }
+            });
+
+            return false
+        })
+
+    </script>
+{% endblock %}
