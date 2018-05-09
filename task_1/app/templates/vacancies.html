@@ -41,14 +41,15 @@
                 <form id="addVacancy">
                     <div class="row">
                         <div class="form-group col-md-3">
-                            <label for="exampleInputEmail1">Наименование</label>
-                            <input type="text" class="form-control" name="name" required
+                            <label for="nameInput">Наименование</label>
+                            <input id="nameInput" type="text" class="form-control" name="name" required
                                    placeholder="Наименование...">
                         </div>
                         <div class="col-md-9"></div>
                         <div class="form-group col-md-3">
-                            <label for="exampleInputEmail1">Уровень заработной платы</label>
-                            <input type="number" class="form-control" aria-describedby="salaryHelp" name="salary" required
+                            <label for="salaryInput">Уровень заработной платы</label>
+                            <input id="salaryInput" type="number" class="form-control" aria-describedby="salaryHelp"
+                                   name="salary" required
                                    placeholder="Уровень з/п...">
                             <div id="salaryHelp">
                                 <small class="form-text text-muted">Должно быть целым числом. Дробная часть будет
@@ -57,17 +58,15 @@
                             </div>
                         </div>
                         <div class="col-md-9"></div>
-                    </div>
-                    <div class="row">
                         <div class="form-group col-md-3">
-                            <label for="exampleInputEmail1">Требуемый опыт работы</label>
-                            <input type="text" class="form-control" name="experience" required
+                            <label for="expInput">Требуемый опыт работы</label>
+                            <input id="expInput" type="text" class="form-control" name="experience" required
                                    placeholder="Опыт работы...">
                         </div>
                         <div class="col-md-9"></div>
                         <div class="form-group col-md-3">
-                            <label for="exampleInputEmail1">Город</label>
-                            <input type="text" class="form-control" name="city" required
+                            <label for="cityInput">Город</label>
+                            <input id="cityInput" type="text" class="form-control" name="city" required
                                    placeholder="Город...">
                         </div>
                         <div class="col-md-9"></div>
@@ -99,7 +98,7 @@
 
                     } else if (!response || response && response.error) {
                         // alerts are too broad, but who cares in testing?
-                        alert('При добавлении вакансии возникла ошибка. ' + response.type && response.type === 'salary' ? 'Заработная плата должна быть числом' : 'Возможно, были заполнены не все поля')
+                        alert('При добавлении вакансии возникла ошибка. ' + response.error === 'salary' ? 'Заработная плата должна быть числом' : 'Возможно, были заполнены не все поля')
                     }
                 },
                 error() {
