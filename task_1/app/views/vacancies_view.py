@@ -15,7 +15,7 @@ class RequiredException(Exception):
 
 @app.route('/', methods=['GET'])
 def index():
-    return redirect(url_for('vacancies'))
+    return redirect(url_for('vacancies_page'))
 
 
 @app.route('/vacancies', methods=['GET', 'PUT'])
