@@ -1,3 +1,3 @@
-from task_1.app import app, init_db
+from task_1.app import init_db
 
 init_db()

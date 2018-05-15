@@ -1,9 +1,6 @@
 import os
 
 from flask import Flask
-from flask import session
-import sqlite3
-from flask_sqlalchemy import SQLAlchemy
 from sqlalchemy import create_engine
 from sqlalchemy.ext.declarative import declarative_base
 from sqlalchemy.orm import scoped_session, sessionmaker

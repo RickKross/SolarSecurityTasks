@@ -1,5 +1,3 @@
-from pprint import pprint
-
 from sqlalchemy import Column, Integer, String
 
 from task_1.app import Base, db_session

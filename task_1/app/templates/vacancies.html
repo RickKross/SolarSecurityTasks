@@ -91,7 +91,7 @@
                 method: "PUT",
                 data: $(this).serialize(),
                 success(response) {
-                    response = JSON.parse(response)
+                    response = JSON.parse(response);
 
                     if (response && response.success) {
                         location.reload();

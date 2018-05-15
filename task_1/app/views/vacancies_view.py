@@ -1,8 +1,6 @@
 import json
-from pprint import pprint
 
-import ujson as ujson
-from flask import Blueprint, render_template, request, session, redirect, url_for
+from flask import Blueprint, render_template, request, redirect, url_for
 
 from task_1.app import app, db_session
 from task_1.app.controllers.vacancies_controller import get_vacancies_list, get_vacancy, delete_vacancy
