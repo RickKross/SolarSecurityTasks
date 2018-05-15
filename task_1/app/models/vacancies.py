@@ -14,8 +14,9 @@ class Vacancies(Base):
     city = Column(String(255))
 
     def __init__(self, **kwargs):
+        self_dir = dir(self)
         for key, value in kwargs.items():
-            if key in dir(self):
+            if key in self_dir:
                 setattr(self, key, value)
         db_session.add(self)
 
